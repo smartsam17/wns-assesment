@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        WNS Assesment
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <link rel="stylesheet" href="/app.ed7d1cf1.css">
+    <link rel="stylesheet" href="/css.967bad95.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
+    <link rel="stylesheet" href="/ag-grid-common.0ae4e017.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+	<script>var socket = io('localhost:5000/');
+socket.emit('getServerName', {
+  data: 'server1'
+});
+socket.on('response', function (data) {
+  console.log(data);
+  grid(data.data);
+});
+var columnDefs = [{
+  headerName: "Server Name",
+  field: "serverName",
+  sortable: true,
+  filter: true,
+  width: 425
+}, {
+  headerName: "CPU Utilization",
+  field: "cpu",
+  sortable: true,
+  filter: true,
+  width: 200
+}, {
+  headerName: "RAM Consumption",
+  field: "ram",
+  sortable: true,
+  filter: true,
+  width: 400
+}, {
+  headerName: "NETWORK Consumption",
+  field: "network",
+  sortable: true,
+  filter: true,
+  width: 450
+}];
+var gridOptions = {
+  columnDefs: columnDefs,
+  rowData: [],
+  onGridReady: function onGridReady(params) {
+    params.api.setRowData([]);
+  },
+  rowHeight: 50,
+  floatingFilter: true
+};
+
+function grid(data) {
+  $('#loading').hide();
+  $('#myGrid').html('');
+  var rowData = data;
+  gridOptions = {
+    columnDefs: columnDefs,
+    rowData: rowData,
+    rowHeight: 40,
+    pagination: true,
+    suppressCsvExport: false,
+    floatingFilter: true
+  };
+  var eGridDiv = document.querySelector('#myGrid');
+  new agGrid.Grid(eGridDiv, gridOptions);
+
+  if (data.length > 0) {
+    $('#exportButton').show();
+  }
+}
+
+function getServer() {
+  $('#detail').html('');
+  socket.emit('getServerName', {
+    data: $('#serverList').val()
+  });
+  socket.on('response', function (data) {
+    console.log(data);
+    grid(data.data);
+  });
+}
+
+function exportToCSV() {
+  gridOptions.api.exportDataAsCsv({
+    'fileName': 'data.csv'
+  });
+}</script>
+    
+<script src="/app.ed7d1cf1.js"></script><script src="/css.967bad95.js"></script><script src="/ag-grid-common.0ae4e017.js"></script></head>   
+<body>
+    <div style="width:100%;color:#fff;font-size:25px;background-color:#000;height:62px;padding:10px 0;">
+        <div style="padding-top:15px;float:left;display: inline-block;height: 100%;vertical-align: middle;padding-left:20px;width:35%">WNS</div>
+        <div style="float:left;width:55%;vertical-align: middle;height:100%;padding-top:15px;">Assesment(Real Time Application)</div> 
+    </div>
+    <div style="clear: both"></div>
+    <div style="margin:30px 0 20px 20px;color:#fff;font-size:15px;">
+
+            <div>
+                    <label style="padding:0 20px 0 0;width:100px;display: inline-block">Server Name</label>
+                    <select name="serverList" id="serverList" onchange="getServer()" class="form-control" style="width:283px;height: 32px; box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);padding-left:5px;">
+                        <option name="server1" value="server1" selected="">Server1</option>
+						<option name="server2" value="server2">Server2</option>
+						<option name="server3" value="server3">Server3</option>
+                    </select>    
+                </div>    
+        </div>
+    <div class="ag-grid-table">
+            <img id="exportButton" style="display:none;width:30px;height:30px;float:right;cursor:pointer;padding-right:10px;" src="/download1.d3f339d8.png" onclick="exportToCSV()" alt="Download" title="Download">
+            <input id="exportButton" style="display:none;width:90px;height: 27px;box-shadow: rgba(0, 0, 0, .5);margin-left:7px;padding:0 10px;font-size:15px;float:right;" type="button" onclick="exportToCSV()" value="Download">
+            <div id="loading" class="loader" style="display: none;"></div>
+            <div id="myGrid" style="height:543px;color:#fff !important;" class="ag-theme-balham"></div>
+    </div>    
+</body>

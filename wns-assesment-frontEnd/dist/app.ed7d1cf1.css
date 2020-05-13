@@ -1,0 +1,128 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.container_main {
+  background-color: #0F2B44;
+  border-radius: 0.6rem 0.6rem 0rem 0rem;
+}
+
+.container_sub_header {
+  border-bottom: 0.5px solid #BECDE0;
+  height: 50px;
+}
+
+.container_sub_header .nav {
+  float: left;
+  padding-left: 31px;
+}
+
+
+a:active {
+  color: #00A68F;
+}
+
+.action_menu {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+  padding-left: 9%;
+}
+
+.action_dropDown {
+  float: left;
+  line-height: 40px;
+  margin-right: 10px;
+}
+
+.action_icons {
+  float: left;
+}
+
+.close_window {
+  float: right;
+  line-height: 44px;
+  color: #fff;
+  padding-right: 1%;
+}
+
+.greenText a {
+  color: #00A68F !important;
+}
+
+.table {
+  color: #fff !important;
+}
+
+.table-hover tbody tr:hover {
+  color: #fff !important;
+}
+
+.sub_header {
+  height: 3rem;
+  background-color: #0F2B44;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.sub_header .nav {
+  float: left !important;
+  font-size: 14px;
+  text-transform: capitalize;
+  clear: both;
+  font-weight: 600;
+}
+
+.sub_header .nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sub_header .nav ul li {
+  float: left;
+}
+
+.sub_header .nav ul li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 13px !important;
+  text-decoration: none;
+}
+
+.sub_header .nav ul li a:hover {
+  border-bottom: 2px solid #00A68F;
+}
+
+.greenText a {
+  color: #00A68F !important;
+}
+
+.coming_soon_container {
+  width: 100%;
+}
+
+.component_coming_soon {
+  font-size: 15px;
+  color: white;
+  padding: 10px 45px;
+}
+
+.errorComponent {
+  color: #fff;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.routeNotExist {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 150px;
+}
+
+/*# sourceMappingURL=/app.ed7d1cf1.css.map */
